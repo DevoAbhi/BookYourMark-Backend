@@ -11,14 +11,21 @@ const MongoDb_URI = "mongodb+srv://Abhinab:x9fBmSkYmgnhVRSe@bookyourmark.zoir8.m
 
 const app = express();
 
+// Routes imports
+const authRoutes = require('./routes/auth')
+
 // x9fBmSkYmgnhVRSe
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use((req,res, next) => {
-    res.send("hello");
-    next();
-})
+// app.use((req,res, next) => {
+//     res.send("hello");
+//     next();
+// })
+
+app.use(authRoutes);
+
+
 
 
 mongoose.connect(MongoDb_URI,
