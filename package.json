@@ -1,0 +1,19 @@
+{
+  "name": "bookyourmark-backend",
+  "version": "1.0.0",
+  "description": "The backend structure of BookYourMark",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevoAbhi/BookYourMark-Backend.git"
+  },
+  "author": "Abhinab Roy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevoAbhi/BookYourMark-Backend/issues"
+  },
+  "homepage": "https://github.com/DevoAbhi/BookYourMark-Backend#readme"
+}
