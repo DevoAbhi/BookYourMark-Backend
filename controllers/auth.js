@@ -7,14 +7,6 @@ exports.postSignUp = (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    console.log(username)
-
-    // if(password.toString() != confirmPassword.toString()){
-    //     return res.status(500).json({
-    //         success: false,
-    //         message: "Confirm Password is not same as password"
-    //     })
-    // }
 
     User.findOne({ email: email}, (err, user) => {
         if(err){
@@ -35,7 +27,8 @@ exports.postSignUp = (req, res, next) => {
             const user = new User({
                 username: username,
                 email: email,
-                password: hashedPassword
+                password: hashedPassword,
+                folders:[]
             })
 
             return user.save();
@@ -49,7 +42,6 @@ exports.postSignUp = (req, res, next) => {
                 })
             }
             console.log("User has been registered!");
-            console.log(result);
             res.status(200).json({
                 success: true,
                 message:"User has been registered successfully"
