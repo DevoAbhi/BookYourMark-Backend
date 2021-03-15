@@ -12,20 +12,25 @@ const MongoDb_URI = "mongodb+srv://Abhinab:x9fBmSkYmgnhVRSe@bookyourmark.zoir8.m
 const app = express();
 
 // Routes imports
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
+const User = require('./models/user');
 
 // x9fBmSkYmgnhVRSe
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use((req,res, next) => {
-//     res.send("hello");
-//     next();
-// })
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Methods",
+    "GET, POST, PATCH,PUT, DELETE,OPTIONS");
+  
+    next();
+});
 
 app.use(authRoutes);
-
-
 
 
 mongoose.connect(MongoDb_URI,
@@ -38,6 +43,8 @@ mongoose.connect(MongoDb_URI,
     })
   })
   .catch(err => {
-      console.log(ERR)
+    console.log("Could not connect to the Database!")
+    console.log(err)
   })
+
 
