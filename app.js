@@ -10,6 +10,10 @@ const MongoDBSession = require('connect-mongodb-session')(session);
 const MongoDb_URI = "mongodb+srv://Abhinab:x9fBmSkYmgnhVRSe@bookyourmark.zoir8.mongodb.net/bookmarks"
 
 const app = express();
+const store_session = new MongoDBSession({
+  uri: MongoDb_URI,
+  collection: 'sessions'
+})
 
 // Routes imports
 const authRoutes = require('./routes/auth');
@@ -19,6 +23,15 @@ const User = require('./models/user');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  session({
+    secret: 'This is a bookmark app',
+    resave: false,
+    saveUninitialized: false,
+    store: store_session
+  })
+)
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
