@@ -14,7 +14,20 @@ const userSchema = new Schema({
     password: {
         type:String,
         required: true
-    }
+    },
+    folders:[
+        {
+            folder_title: { 
+                type: String,
+                required: true 
+            },
+            bookmark_id:{
+                type: Schema.Types.ObjectId,
+                ref: 'Bookmark',
+                required: true
+            }
+        }
+    ]
 })
 
 module.exports = mongoose.model('User', userSchema);
