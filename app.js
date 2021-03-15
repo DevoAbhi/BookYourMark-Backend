@@ -34,7 +34,7 @@ app.use(authRoutes);
 
 
 mongoose.connect(MongoDb_URI,
-    { useUnifiedTopology: true }, { useNewUrlParser: true }
+    { useUnifiedTopology: true, useNewUrlParser: true }
   )
   .then(result => {
     console.log("Database has been connected successfully!")
