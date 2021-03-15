@@ -84,6 +84,10 @@ exports.postLogin = (req, res, next) => {
                         'secret_which_I_have_kept_small_but_has_to_be_longer',
                         { expiresIn: '1hr' }
                     )
+
+                    res.status(200).json({
+                        token: token
+                    })
                 })
                 .catch(err => {
                     return res.status(401).json({
