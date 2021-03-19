@@ -57,6 +57,7 @@ exports.postSignUp = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    let fetchedUser;
 
     User.findOne({ email : email })
         .then(user => {
@@ -66,40 +67,35 @@ exports.postLogin = (req, res, next) => {
                     message: "User not found"
                 })
             }
+            fetchedUser = user;
 
-            bcrypt.compare(password, user.password)
-                .then(isMatching => {
-                    if(!isMatching) {
-                        return res.status(401).json({
-                            success: false,
-                            message: "Password does not match"
-                        })
-                    }
-
-                    const token = jwt.sign(
-                        {
-                            email: user.email,
-                            userId: user._id
-                        },
-                        'secret_which_I_have_kept_small_but_has_to_be_longer',
-                        { expiresIn: '1hr' }
-                    )
-
-                    res.status(200).json({
-                        token: token
-                    })
-                })
-                .catch(err => {
+            return bcrypt.compare(password, user.password)
+        })
+            .then(isMatching => {
+                if(!isMatching) {
                     return res.status(401).json({
-                        message: 'Something went wrong decripting password'
+                        success: false,
+                        message: "Password does not match"
                     })
+                }
+
+                const token = jwt.sign(
+                    {
+                        email: fetchedUser.email,
+                        userId: fetchedUser._id
+                    },
+                    'secret_which_I_have_kept_small_but_has_to_be_longer',
+                    { expiresIn: '1hr' }
+                );
+
+                res.status(200).json({
+                    token: token
                 })
-
-        })
-        .catch(err => {
-            return res.status(401).json({
-                message: 'Something went wrong'
             })
-        })
+            .catch(err => {
+                return res.status(401).json({
+                    message: 'Something went wrong decripting password'
+                })
+            })
 
-}
+        }
