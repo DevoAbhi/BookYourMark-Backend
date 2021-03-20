@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const User = require('../models/user')
 
 module.exports = (req, res, next) => {
     try {
@@ -8,7 +9,13 @@ module.exports = (req, res, next) => {
 
         if(user_credentials){
             req.token = user_credentials;
-            next();
+            
+            User.findOne({_id : req.token.user_id})
+            .then(user => {
+                req.user = user;
+                next();
+            })
+           
         }
         else{
             throw new Error('Invalid Token!')
