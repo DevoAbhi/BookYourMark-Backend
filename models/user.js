@@ -21,11 +21,12 @@ const userSchema = new Schema({
                 type: String,
                 required: true 
             },
-            bookmark_id:{
+            bookmark_id: [
+                {
                 type: Schema.Types.ObjectId,
-                ref: 'Bookmark',
-                required: true
+                ref: 'Bookmark'
             }
+        ]
         }
     ]
 })
