@@ -82,7 +82,7 @@ exports.postLogin = (req, res, next) => {
                 const token = jwt.sign(
                     {
                         email: fetchedUser.email,
-                        userId: fetchedUser._id
+                        user_id: fetchedUser._id
                     },
                     'secret_which_I_have_kept_small_but_has_to_be_longer',
                     { expiresIn: '1hr' }
