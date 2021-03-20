@@ -17,6 +17,7 @@ const store_session = new MongoDBSession({
 
 // Routes imports
 const authRoutes = require('./routes/auth');
+const dashboardRoutes = require('./routes/dashboard')
 const User = require('./models/user');
 
 // x9fBmSkYmgnhVRSe
@@ -36,7 +37,7 @@ app.use(
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-AUTH-TOKEN");
     res.setHeader("Access-Control-Allow-Methods",
     "GET, POST, PATCH,PUT, DELETE,OPTIONS");
   
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 });
 
 app.use(authRoutes);
+app.use(dashboardRoutes);
 
 
 mongoose.connect(MongoDb_URI,
