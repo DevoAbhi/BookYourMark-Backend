@@ -31,4 +31,9 @@ const userSchema = new Schema({
     ]
 })
 
+userSchema.methods.addFolder = function (folder_title) {
+    this.folders.push({folder_title: folder_title})
+    return this.save()
+}
+
 module.exports = mongoose.model('User', userSchema);
