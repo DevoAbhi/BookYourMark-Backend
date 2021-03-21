@@ -17,7 +17,7 @@ const store_session = new MongoDBSession({
 
 // Routes imports
 const authRoutes = require('./routes/auth');
-const dashboardRoutes = require('./routes/dashboard')
+const folderRoutes = require('./routes/folders')
 const User = require('./models/user');
 
 // x9fBmSkYmgnhVRSe
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 });
 
 app.use(authRoutes);
-app.use(dashboardRoutes);
+app.use(folderRoutes);
 
 
 mongoose.connect(MongoDb_URI,

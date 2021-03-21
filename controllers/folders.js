@@ -28,3 +28,27 @@ exports.postCreateFolder = async (req, res, next) => {
         })
     }
 }
+
+exports.getFolders = async (req, res, next) => {
+    try {
+
+        User.findOne({_id : req.user._id})
+        .then(user => {
+            const folders = user.folders
+            const username = user.username
+
+            res.status(200).json({
+                success: true,
+                username: username,
+                folders: folders
+            })
+        })
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message : "Something went wrong when viewing folders"
+        })
+    }
+}
