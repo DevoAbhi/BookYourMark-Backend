@@ -12,6 +12,7 @@ exports.postCreateFolder = async (req, res, next) => {
         req.user.addFolder(folder_title)
         .then(result => {
             console.log(result);
+            
             res.status(200).json({
                 success: true,
                 folder_title: folder_title,
@@ -52,3 +53,40 @@ exports.getFolders = async (req, res, next) => {
         })
     }
 }
+
+    exports.postRenameFolder = async (req, res, next) => {
+        
+
+        try{
+            const folderId = req.body.folderId;
+            console.log(folderId)
+            const folder_title = req.body.folder_title;
+            
+            // user.findByIdAndUpdate(folderId, {
+            //     $set: {
+            //         folder_title: folder_title
+            //     }
+            // }).then(result => {
+            //     console.log(result)
+            // })
+            await User.updateOne({'folders._id' : folderId},{
+                $set : {
+                    'folders.$.folder_title': folder_title
+                }
+            }).then(result => {
+                console.log(result)
+                res.status(200).json({
+                    success: true,
+                    message: "The folder title has been updated!"
+                })
+            })
+        }
+        catch(err){
+            console.log(err);
+            res.status(500).json({
+                success: false,
+                message: "Folder title updation failed due to some error!"
+            })
+        }
+
+    }
