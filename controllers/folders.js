@@ -12,10 +12,10 @@ exports.postCreateFolder = async (req, res, next) => {
         
         req.user.addFolder(folder_title)
         .then(result => {
-            console.log(result);
             
             res.status(200).json({
                 success: true,
+                _id : result.folders.slice(-1)[0]._id,
                 folder_title: folder_title,
                 message: "Folder has been saved!"
             })
@@ -63,13 +63,6 @@ exports.getFolders = async (req, res, next) => {
             console.log(folderId)
             const folder_title = req.body.folder_title;
             
-            // user.findByIdAndUpdate(folderId, {
-            //     $set: {
-            //         folder_title: folder_title
-            //     }
-            // }).then(result => {
-            //     console.log(result)
-            // })
             await User.updateOne({'folders._id' : folderId},{
                 $set : {
                     'folders.$.folder_title': folder_title
