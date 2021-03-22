@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const Bookmark = require('../models/booksmarks')
 
 exports.postCreateFolder = async (req, res, next) => {
     
@@ -90,3 +91,46 @@ exports.getFolders = async (req, res, next) => {
         }
 
     }
+
+exports.postDeleteFolder = async (req, res, next) => {
+    
+    try{
+        const folder_id = req.query.folder_id;
+        console.log(folder_id)
+        const user = await User.findById(req.user._id);
+        if(user != null) {
+            await Bookmark.deleteMany({folder_id: folder_id}).then(result => {
+                console.log(result)
+            })
+
+            try {
+                req.user.removeFolder(folder_id).then(result => {
+                    console.log("Result after removing the folder from the users")
+                    console.log(result)
+                    res.status(200).json({
+                        success: true,
+                        message: "Folder has been deleted!"
+                    })
+                })
+                
+                
+
+                
+            }
+            catch(err){
+                console.log(err);
+                res.status(500).json({
+                    success: false,
+                    message: "Something went wrong removing folder from users"
+                })
+            }
+        }
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong deleting the folder"
+        })
+    }
+}

@@ -20,13 +20,15 @@ const userSchema = new Schema({
             folder_title: { 
                 type: String,
                 required: true 
-            },
-            bookmark_id: [
-                {
-                type: Schema.Types.ObjectId,
-                ref: 'Bookmark'
             }
-        ]
+        //     bookmark_ids: [
+        //         {
+        //             bookmark_id : {
+        //                 type: String
+        //             }
+        //     }
+                
+        // ]
         }
     ]
 })
@@ -35,5 +37,29 @@ userSchema.methods.addFolder = function (folder_title) {
     this.folders.push({folder_title: folder_title})
     return this.save()
 }
+
+returnIndex = (folders, folder_id) => {
+    for (let i = 0; i < folders.length; i++){
+        if(String(folders[i]._id) === String(folder_id))
+            return i
+    }
+}
+
+userSchema.methods.removeFolder = function (folder_id) {
+
+    let folders = this.folders;
+    let index = returnIndex(folders, folder_id);
+
+    if(index != undefined) {
+        folders.splice(index, 1);
+        this.folders = folders;
+        return this.save()
+    }
+
+    return "yaha hu bsdk"
+
+}
+
+
 
 module.exports = mongoose.model('User', userSchema);

@@ -13,7 +13,13 @@ const bookmarksSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    
+    folder_id : {
+        type: Schema.Types.ObjectId,
+        required: true
     }
+    
 })
 
 module.exports = mongoose.model('Bookmark', bookmarksSchema);
