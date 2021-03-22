@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const bookmarksSchema = new Schema({
-    title:{
+    bookmark_title:{
         type: String,
         required: true
     },
