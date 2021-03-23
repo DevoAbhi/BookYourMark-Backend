@@ -14,9 +14,12 @@ const bookmarksSchema = new Schema({
         type: String,
         required: true
     },
-    
-    folder_id : {
-        type: Schema.Types.ObjectId,
+    folder_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    folder_title : {
+        type: String,
         required: true
     }
     

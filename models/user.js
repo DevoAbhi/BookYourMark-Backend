@@ -56,8 +56,6 @@ userSchema.methods.removeFolder = function (folder_id) {
         return this.save()
     }
 
-    return "yaha hu bsdk"
-
 }
 
 
