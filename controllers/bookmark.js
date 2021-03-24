@@ -82,11 +82,9 @@ exports.putUpdateBookmark = async (req, res, next) => {
                 description: description
             }
         }).then(result => {
-            console.log(result);
             return res.status(200).json({
                 success: true,
                 message: "The bookmark has been updated",
-                bookmark : result
             })
         })
     }
@@ -97,4 +95,29 @@ exports.putUpdateBookmark = async (req, res, next) => {
             message: 'Something went wrong updating the bookmark!'
         })
     }
+}
+
+exports.deleteBookmark = async (req, res, next) => {
+    
+    try {
+        const bookmark_id = req.query.bookmark_id;
+
+        await Bookmark.findByIdAndDelete(bookmark_id).then(result => {
+            res.status(200).json({
+            success: true,
+            message: "Bookmark has been deleted!"
+        })
+    })
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong deleting the bookmark!"
+        })
+    }
+
+
+
+
 }
