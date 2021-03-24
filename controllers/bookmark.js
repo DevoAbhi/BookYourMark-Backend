@@ -67,3 +67,34 @@ exports.getBookmarks = async (req, res, next) => {
         })
     }
 }
+
+exports.putUpdateBookmark = async (req, res, next) => {
+    const bookmark_id = req.body.bookmark_id;
+    const bookmark_title = req.body.bookmark_title;
+    const href = req.body.href;
+    const description = req.body.description;
+
+    try{
+        await Bookmark.findByIdAndUpdate(bookmark_id, {
+            $set: {
+                bookmark_title: bookmark_title,
+                href: href,
+                description: description
+            }
+        }).then(result => {
+            console.log(result);
+            return res.status(200).json({
+                success: true,
+                message: "The bookmark has been updated",
+                bookmark : result
+            })
+        })
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({
+            success: false,
+            message: 'Something went wrong updating the bookmark!'
+        })
+    }
+}
