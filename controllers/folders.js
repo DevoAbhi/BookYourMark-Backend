@@ -17,7 +17,7 @@ exports.postCreateFolder = async (req, res, next) => {
                 success: true,
                 _id : result.folders.slice(-1)[0]._id,
                 folder_title: folder_title,
-                message: "Folder has been saved!"
+                message: "Folder has been created!"
             })
         })
         
