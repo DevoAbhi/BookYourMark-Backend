@@ -3,11 +3,11 @@ const path = require('path');
 // Requiring dependancies 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session);
 
-const MongoDb_URI = "mongodb+srv://Abhinab:x9fBmSkYmgnhVRSe@bookyourmark.zoir8.mongodb.net/bookmarks"
+const MongoDb_URI = "mongodb+srv://Abhinab:" + process.env.MONGO_ATLAS_PW + "@bookyourmark.zoir8.mongodb.net/bookmarks"
 
 const app = express();
 // const store_session = new MongoDBSession({
@@ -45,9 +45,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(authRoutes);
-app.use(folderRoutes);
-app.use(bookmarkRoutes);
+app.use('/user',authRoutes);
+app.use('/folder',folderRoutes);
+app.use('/bookmark',bookmarkRoutes);
 
 
 mongoose.connect(MongoDb_URI,

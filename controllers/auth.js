@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const User = require('../models/user')
+const User = require('../models/user');
 
 
 exports.postSignUp = (req, res, next) => {
@@ -84,7 +84,7 @@ exports.postLogin = (req, res, next) => {
                         email: fetchedUser.email,
                         user_id: fetchedUser._id
                     },
-                    'secret_which_I_have_kept_small_but_has_to_be_longer',
+                    process.env.JWT_KEY,
                     { expiresIn: '1hr' }
                 );
 

@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     try {
         const token = req.get('X-AUTH-TOKEN')
 
-        let user_credentials =jwt.verify(token, 'secret_which_I_have_kept_small_but_has_to_be_longer');
+        let user_credentials =jwt.verify(token, process.env.JWT_KEY);
 
         if(user_credentials){
             req.token = user_credentials;
