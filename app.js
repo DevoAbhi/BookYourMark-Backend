@@ -18,7 +18,8 @@ const app = express();
 // Routes imports
 const authRoutes = require('./routes/auth');
 const folderRoutes = require('./routes/folders');
-const bookmarkRoutes = require('./routes/bookmark')
+const bookmarkRoutes = require('./routes/bookmark');
+const usersRoute = require('./routes/users')
 const User = require('./models/user');
 
 // x9fBmSkYmgnhVRSe
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 app.use('/user',authRoutes);
 app.use('/folder',folderRoutes);
 app.use('/bookmark',bookmarkRoutes);
+app.use(usersRoute)
 
 
 mongoose.connect(MongoDb_URI,

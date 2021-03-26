@@ -10,6 +10,7 @@ router.post('/rename-folder', isAuthenticated, foldersController.postRenameFolde
 router.delete('/delete-folder', isAuthenticated, foldersController.postDeleteFolder)
 
 // Get routes
+
 router.get('/view-folders',isAuthenticated, foldersController.getFolders)
 
 

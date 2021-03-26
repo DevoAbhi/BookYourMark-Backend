@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/bc8152a5-9e44-4fa5-aec9-bdd4f8dd98db/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/bookyourmark-api-services",
+    "appService.deploySubpath": "."
+}
