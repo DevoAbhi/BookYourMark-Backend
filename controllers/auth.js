@@ -100,3 +100,5 @@ exports.postLogin = (req, res, next) => {
             })
 
         }
+
+        // npm run test --if-present
