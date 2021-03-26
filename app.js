@@ -45,11 +45,11 @@ app.use((req, res, next) => {
   
     next();
 });
-
+app.use(usersRoute)
 app.use('/user',authRoutes);
 app.use('/folder',folderRoutes);
 app.use('/bookmark',bookmarkRoutes);
-app.use(usersRoute)
+
 
 
 mongoose.connect(MongoDb_URI,
