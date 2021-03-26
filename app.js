@@ -55,9 +55,7 @@ mongoose.connect(MongoDb_URI,
   )
   .then(result => {
     console.log("Database has been connected successfully!")
-    app.listen(3000, () => {
-        console.log("Server is running at port 3000")
-    })
+    
   })
   .catch(err => {
     console.log("Could not connect to the Database!")
@@ -65,3 +63,8 @@ mongoose.connect(MongoDb_URI,
   })
 
 
+module.exports = app
+
+// app.listen(3000, () => {
+//   console.log("Server is running at port 3000")
+// })

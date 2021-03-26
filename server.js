@@ -1,6 +1,7 @@
-const app = require("./backend/app");
+const app = require("./app");
 const debug = require("debug")("node-angular");
 const http = require("http");
+
 
 const normalizePort = val => {
   var port = parseInt(val, 10);
@@ -49,4 +50,6 @@ app.set("port", port);
 const server = http.createServer(app);
 server.on("error", onError);
 server.on("listening", onListening);
-server.listen(port);
+server.listen(port, ()=> {
+  console.log("Server is listening!")
+});
