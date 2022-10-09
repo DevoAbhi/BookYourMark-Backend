@@ -8,6 +8,14 @@ exports.getAllUsers = async (req, res, next) => {
                 users: users
             })
         })
+        .catch(err => {
+            {
+                console.log(err);
+                res.status(500).json({
+                    message: "Error getting users"
+                })
+            }
+        }) 
     }
     catch(err) {
         console.log(err);

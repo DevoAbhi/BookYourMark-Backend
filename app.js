@@ -1,13 +1,13 @@
 const path = require('path');
 
-// Requiring dependancies 
+// Requiring dependancies
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session);
 
-const MongoDb_URI = "mongodb+srv://Abhinab:" + process.env.MONGO_ATLAS_PW + "@bookyourmark.zoir8.mongodb.net/bookmarks"
+const MongoDb_URI = "mongodb+srv://Abhinab:" +  process.env.MONGO_ATLAS_PW + "@bookyourmark.zoir8.mongodb.net/bookmarks"
 
 const app = express();
 // const store_session = new MongoDBSession({
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
     "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-AUTH-TOKEN");
     res.setHeader("Access-Control-Allow-Methods",
     "GET, POST, PATCH,PUT, DELETE,OPTIONS");
-  
+
     next();
 });
 app.use(usersRoute)
@@ -57,7 +57,7 @@ mongoose.connect(MongoDb_URI,
   )
   .then(result => {
     console.log("Database has been connected successfully!")
-    
+
   })
   .catch(err => {
     console.log("Could not connect to the Database!")
@@ -66,7 +66,7 @@ mongoose.connect(MongoDb_URI,
 
 
 module.exports = app
-
+  
 // app.listen(3000, () => {
 //   console.log("Server is running at port 3000")
 // })

@@ -34,9 +34,9 @@ exports.postSignUp = (req, res, next) => {
 
             return user.save();
         })
-        .then((err, result) => {
+        .then((result, err) => {
             if(err){
-                console.log(err)
+                console.log("Error: ", err)
                 return res.status(500).json({
                     success: false,
                     message: "Something went wrong while saving"
